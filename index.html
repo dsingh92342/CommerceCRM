@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CommerceCRM — Ecommerce Seller Hub</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <!-- Mobile top bar -->
+    <header class="mobile-bar">
+      <button class="icon-btn" id="menuBtn">☰</button>
+      <div class="brand-name">CommerceCRM</div>
+      <button class="icon-btn" id="themeBtnMobile">🌙</button>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-logo">CC</div>
+        <div>
+          <div class="brand-name">CommerceCRM</div>
+          <div class="brand-sub">Seller Hub</div>
+        </div>
+        <button class="icon-btn close-btn" id="closeSidebar">✕</button>
+      </div>
+
+      <nav class="nav" id="nav">
+        <a href="#dashboard" class="nav-item" data-route="dashboard"><span class="nav-icon">📊</span><span>Dashboard</span><span class="kbd">D</span></a>
+        <a href="#customers" class="nav-item" data-route="customers"><span class="nav-icon">👥</span><span>Customers</span><span class="kbd">C</span></a>
+        <a href="#orders" class="nav-item" data-route="orders"><span class="nav-icon">📦</span><span>Orders</span><span class="kbd">O</span></a>
+        <a href="#kanban" class="nav-item" data-route="kanban"><span class="nav-icon">🗂</span><span>Pipeline</span><span class="kbd">P</span></a>
+        <a href="#messages" class="nav-item" data-route="messages"><span class="nav-icon">💬</span><span>Messages</span><span class="nav-badge" id="msgBadge">0</span></a>
+        <a href="#tasks" class="nav-item" data-route="tasks"><span class="nav-icon">✅</span><span>Tasks</span></a>
+        <a href="#campaigns" class="nav-item" data-route="campaigns"><span class="nav-icon">📣</span><span>Campaigns</span></a>
+        <a href="#templates" class="nav-item" data-route="templates"><span class="nav-icon">✉️</span><span>Templates</span><span class="kbd">T</span></a>
+        <a href="#integrations" class="nav-item" data-route="integrations"><span class="nav-icon">🔌</span><span>Integrations</span></a>
+        <a href="#custom" class="nav-item" data-route="custom"><span class="nav-icon">⚡</span><span>Custom API</span></a>
+        <a href="#settings" class="nav-item" data-route="settings"><span class="nav-icon">⚙️</span><span>Settings</span></a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="connected-stores" id="connectedStores"></div>
+        <div class="user-chip">
+          <div class="avatar">SK</div>
+          <div>
+            <div class="user-name">Seller Admin</div>
+            <div class="user-role">Owner</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="topbar">
+        <div class="page-title">
+          <h1 id="pageTitle">Dashboard</h1>
+          <p id="pageSubtitle">Overview of your multi-channel business</p>
+        </div>
+        <div class="topbar-actions">
+          <div class="search">
+            <span>🔍</span>
+            <input type="text" id="globalSearch" placeholder="Search (press / to focus)..." />
+            <span class="kbd">/</span>
+          </div>
+          <button class="icon-btn" id="themeBtn" title="Toggle theme">🌙</button>
+          <button class="btn btn-primary" id="newBtn">+ New</button>
+        </div>
+      </header>
+
+      <section class="view" id="view"></section>
+      <footer class="footer">
+        <span>CommerceCRM v2.0</span> · <span id="storageInfo">All data stored locally</span> · Press <span class="kbd">?</span> for shortcuts
+      </footer>
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modal">
+      <div class="modal-head">
+        <h3 id="modalTitle">Title</h3>
+        <button class="icon-btn" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Detail drawer (for Customer 360 etc) -->
+  <div class="drawer-backdrop" id="drawerBackdrop">
+    <aside class="drawer" id="drawer"></aside>
+  </div>
+
+  <!-- Toast container -->
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <!-- Keyboard help -->
+  <div class="modal-backdrop" id="helpBackdrop">
+    <div class="modal" style="max-width:480px">
+      <div class="modal-head">
+        <h3>Keyboard shortcuts</h3>
+        <button class="icon-btn" id="helpClose">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="shortcut"><span>Go to Dashboard</span><span class="kbd">D</span></div>
+        <div class="shortcut"><span>Go to Customers</span><span class="kbd">C</span></div>
+        <div class="shortcut"><span>Go to Orders</span><span class="kbd">O</span></div>
+        <div class="shortcut"><span>Go to Pipeline</span><span class="kbd">P</span></div>
+        <div class="shortcut"><span>Go to Messages</span><span class="kbd">M</span></div>
+        <div class="shortcut"><span>Go to Campaigns</span><span class="kbd">K</span></div>
+        <div class="shortcut"><span>Go to Templates</span><span class="kbd">E</span></div>
+        <div class="shortcut"><span>Search</span><span class="kbd">/</span></div>
+        <div class="shortcut"><span>Create new</span><span class="kbd">N</span></div>
+        <div class="shortcut"><span>Toggle theme</span><span class="kbd">T</span></div>
+        <div class="shortcut"><span>Show this help</span><span class="kbd">?</span></div>
+        <div class="shortcut"><span>Close modal/drawer</span><span class="kbd">Esc</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
