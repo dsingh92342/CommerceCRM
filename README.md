@@ -9,7 +9,6 @@ Manage customers, orders, messages, tasks, campaigns, and integrations across **
 ![Status](https://img.shields.io/badge/status-ready-success)
 ![No Backend](https://img.shields.io/badge/backend-not%20required-blue)
 ![Storage](https://img.shields.io/badge/storage-localStorage-orange)
-![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
 </div>
 
